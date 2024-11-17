@@ -55,14 +55,22 @@ class Board:
             self.grid[x, y] = MISS
             return "Disparo fallido"
 
-    def display(self):
-        # Mostrar el tablero visible con impactos y agua
-        print(self.grid)
+    def display(self): #Muestra el tablero simulando una tabla con un indicador de columna y de fila para indicar las coordenadas
+        columnas = "   " + " ".join(f"{i:2}" for i in range(self.size))
+        print(columnas)
+        print("   " + "-" * (self.size * 3))
+        for i, fila in enumerate(self.grid):
+            fila_completa = " ".join(f"{cell:2}" for cell in fila)
+            print(f"{i:2} | {fila_completa}")
 
-    def display_full_board(self):
-        # Mostrar el tablero completo con los barcos y los impactos
+    def display_full_board(self): #Muestra el tablero con la ubicacion de los barcos
         full_board = np.where(self.ship_grid == SHIP, SHIP, self.grid)
-        print(full_board)
+        columnas = "   " + " ".join(f"{i:2}" for i in range(self.size))
+        print(columnas)
+        print("   " + "-" * (self.size * 3))
+        for i, fila in enumerate(full_board):
+            fila_completa = " ".join(f"{cell:2}" for cell in fila)
+            print(f"{i:2} | {fila_completa}")
 
     def is_sunk(self, ship_coordinates):
         return all(self.grid[x, y] == HIT for x, y in ship_coordinates)
