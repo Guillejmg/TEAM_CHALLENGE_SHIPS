@@ -48,6 +48,9 @@ class Board:
         return False
 
     def shoot(self, x, y):
+        # Verificar si ya se ha disparado en la coordenada
+        if self.grid[x, y] == HIT or self.grid[x, y] == MISS:
+            return "Ya has disparado en esta coordenada. Intenta con otra."
         if self.ship_grid[x, y] == SHIP:
             self.grid[x, y] = HIT
             return "Disparo certero"
